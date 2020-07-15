@@ -31,6 +31,25 @@ public:
 };
 // @lc code=end
 
+
+
+class Solution{
+public:
+    // 哈希表查重
+    bool hasCycle(ListNode *head) {
+        unordered_set<ListNode*> nodesSeen;
+        while (head != nullptr) {
+            if (nodesSeen.count(head)) {
+                return true;
+            } else {
+                nodesSeen.insert(head);
+            }
+            head = head->next;
+        }
+        return false;
+    }
+};
+
 class Solution {
 public:
     // 官方题解 快慢指针
