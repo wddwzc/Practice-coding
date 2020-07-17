@@ -1,41 +1,103 @@
 #include <iostream>
 #include <vector>
-using namespace std;
-int main()
-{
-	int n, count = 1, max = 1;
-	cin >> n;
-    vector<int> stone(n);
-    vector<bool> flag(n);
-	for (int i = 0; i < n; i++)
-	{
-		cin >> stone[i];
-	} 
+#include <stack>
+#include <unordered_map>
 
-	for (int i = 0; i < n; i++)
-	{
-        if (flag[i]) {
-            continue;
+using namespace std;
+
+class Solution {
+public:
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n = graph.size();
+        unordered_map<int, int> mark_map;
+        stack<int> node_stack;
+        int ind, ind_linked;
+        cout << "input" << endl;
+        for (int j = 0; j < n; ++j) {
+            for (auto mark : mark_map) {
+                cout << mark.first << " " << mark.second << endl;
+            }
+            cout << endl;
+
+            cout << j << endl;
+
+            
+            if (mark_map.count(j) == 0) {
+                mark_map[j] = 0;
+                node_stack.push(j);
+            }
+            else {
+                continue;
+            }
+
+            while (!node_stack.empty()) {
+                ind = node_stack.top();
+                node_stack.pop();
+                for (int i = 0; i < graph[ind].size(); ++i) {
+                    ind_linked = graph[ind][i];
+                    if (mark_map.count(ind_linked) == 0) {
+                        mark_map[ind_linked] = mark_map[ind] ^ 1;
+                        node_stack.push(ind_linked);
+                    }
+                    else {
+                        if (mark_map[ind_linked] == mark_map[ind]) {
+                            return false;
+                        }
+                    }
+                }
+            }
         }
-        count = 1;
-        int temp = stone[i];
-		for (int j = i + 1; j < n; j++)
-		{
-			if (temp + 1 == stone[j])//判断相邻两数字是否递增1
-			{
-				count = count + 1;//递增1子序列的长度
-                flag[j] = true;
-                temp = stone[j];
-			}
-		}
-		if (count > max)//更新递增1子序列的长度
-		{
-			max = count;
-		}
-	}
-	cout << n - max << endl;
-	system("PAUSE");
+        return true;
+    }
+};
+
+int main()
+{	
+	Solution sol;
+	vector<vector<int>> input = {{}, {3}, {}, {1}};
+	sol.isBipartite(input);
+	system("pause");
+	return 0;
 }
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+// int main()
+// {
+// 	int n, count = 1, max = 1;
+// 	cin >> n;
+//     vector<int> stone(n);
+//     vector<bool> flag(n);
+// 	for (int i = 0; i < n; i++)
+// 	{
+// 		cin >> stone[i];
+// 	} 
+
+// 	for (int i = 0; i < n; i++)
+// 	{
+//         if (flag[i]) {
+//             continue;
+//         }
+//         count = 1;
+//         int temp = stone[i];
+// 		for (int j = i + 1; j < n; j++)
+// 		{
+// 			if (temp + 1 == stone[j])//判断相邻两数字是否递增1
+// 			{
+// 				count = count + 1;//递增1子序列的长度
+//                 flag[j] = true;
+//                 temp = stone[j];
+// 			}
+// 		}
+// 		if (count > max)//更新递增1子序列的长度
+// 		{
+// 			max = count;
+// 		}
+// 	}
+// 	cout << n - max << endl;
+// 	system("PAUSE");
+// }
 
 // int main()
 // {

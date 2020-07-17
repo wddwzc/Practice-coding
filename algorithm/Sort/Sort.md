@@ -154,6 +154,14 @@ Class MaxPQ
 public:
     void MaxPQ();
     MaxPQ(int max);
-    
+    MaxPQ(Key[] a);
+    void insert(Key v);
+    Key max();
+    Key delMax();
+    bool isEmpty();
+    int size();
 }
 ```
+
+MaxPQ和MinPQ的转换很简单
+

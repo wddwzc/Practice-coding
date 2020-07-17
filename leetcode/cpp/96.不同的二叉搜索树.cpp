@@ -6,20 +6,28 @@
 
 // @lc code=start
 // 动态规划
+// 记忆化递归  优化了结构
 class Solution {
 public:
     int numTrees(int n) {
-        vector<int> dp(n + 1);
-        dp[0] = 1;
-        for (int i = 1; i <= n; ++i) {
-            for (int j = 0; j < i; ++j) {
-                dp[i] += dp[j] * dp[i - j - 1];
-            }
-        }
-        return dp[n];
+        if (n == 0 || n == 1)  return 1;
+        memo.assign(n + 1, 0);
+        memo[0] = 1;
+        memo[1] = 1;
+        return numTrees_helper(n);
     }
+
+    int numTrees_helper(int n) {
+        if (memo[n] > 0)  return memo[n];
+        for (int i = 1; i <= n; ++i) {
+            memo[n] += numTrees_helper(i - 1) * numTrees_helper(n - i);
+        }
+        return memo[n];
+    }
+    vector<int> memo;
 };
 // @lc code=end
+
 
 // 数学方法  卡塔兰数字
 class Solution {
@@ -50,7 +58,7 @@ public:
 };
 
 
-// 记忆化递归  普通递归超市
+// 记忆化递归  普通递归超时
 class Solution {
 public:
     int numTrees(int n) {
@@ -86,4 +94,25 @@ public:
         return count;
     }
     unordered_map<int, int> subTree;
+};
+
+// 记忆化递归  优化了结构
+class Solution {
+public:
+    int numTrees(int n) {
+        if (n == 0 || n == 1)  return 1;
+        memo.assign(n + 1, 0);
+        memo[0] = 1;
+        memo[1] = 1;
+        return numTrees_helper(n);
+    }
+
+    int numTrees_helper(int n) {
+        if (memo[n] > 0)  return memo[n];
+        for (int i = 1; i <= n; ++i) {
+            memo[n] += numTrees_helper(i - 1) * numTrees_helper(n - i);
+        }
+        return memo[n];
+    }
+    vector<int> memo;
 };
