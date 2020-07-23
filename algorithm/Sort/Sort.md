@@ -165,3 +165,102 @@ public:
 
 MaxPQ和MinPQ的转换很简单
 
+从N个输入中找到最大的M个元素：
+
+* 排序算法：O(NlogN)
+* 初级实现的优先队列：O(NM)
+* 基于堆实现的优先队列列：O(NlogM)
+
+### 初级实现
+
+**数组实现（无序）**：将最大元素和边界元素交换然后删除
+
+**数组实现（有序）**：insert()中添加代码，较大元素右移，则back()就是最大
+
+**链表表示法**：基于链表的下压栈
+
+### 堆的定义
+
+当一棵二叉树的每个结点都大于等于它的两个子结点时，它被称为堆有序
+
+大顶堆：每个节点都小于它的父节点，根节点是最大节点
+
+**二叉堆表示法**
+
+如果采用链式表示法，每个节点需要3个指针
+
+如果使用**完全二叉树**，接可以用**数组**表示，按照**层级顺序**放入数组，根节点在位置1
+
+一般**堆**指的就是数组表示的**二叉堆**
+
+可实现操作：插入元素、删除最大元素
+
+特点：
+
+* 第k个节点的叶子节点2k和2k+1
+* 第k个节点的父节点k/2
+* 大小为N的完全二叉树高度[lgN]（去尾）
+* 索引最好从1开始，方便计算
+
+**堆的算法**
+
+```c++
+class MaxPQ
+{
+public:
+    MaxPQ(int maxN) {
+        pq = vector<int>(maxN);
+    }
+    bool isEmpty() {
+        return N == 0;
+    }
+    int size() {
+        return N;
+    }
+    void insert(int v) {
+        pq.push_back(v);
+        ++N;
+        swim(N);
+    }
+    int delMax() {
+        int max = pq[1];
+        exch(1, N--);
+        sink(1);
+        return max;
+    }
+
+private:
+    vector<int> pq;
+    int N = 0;
+    void less(int i, int j) {
+        return pq[i] < pq[j];
+    }
+    void exch(int i, int j) {
+        int t = pq[i];
+        pq[i] = pq[j];
+        pq[j] = t;
+    }
+    void swim(int k) {
+        while (k > 1 && less(k/2, k)) {
+            exch(k/2, k);
+            k = k / 2;
+        }
+    }
+    void sink(int k) {
+        while (2 * k <= N>) {
+            int j = 2 * k;
+            if (j < N && j + 1 < N && less(j, j + 1))  j++;
+            if (!less(k, j))  break;
+            exch(k, j);
+            k = j;
+        }
+    }
+}
+```
+
+- **上浮 swim**：由下至上的堆有序变化，节点优先级上升（或在堆低加入了新元素）
+- **下沉 sink**：由上至下的堆有序变化，父节点比子节点小，需要下沉调整
+- **插入元素**：新元素加到末尾，增加堆大小，让新元素上浮
+- **删除最大元素**：从数组顶删去最大元素，并将最后元素置于顶，减小堆大小，并下沉
+
+插入元素和删除最大元素可以保证在logN
