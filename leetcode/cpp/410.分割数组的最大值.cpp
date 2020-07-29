@@ -50,3 +50,26 @@ public:
         return left;
     }
 };
+
+
+// 动态规划
+class Solution {
+public:
+    int splitArray(vector<int>& nums, int m) {
+        int n = nums.size();
+        vector<long long> pre_sum(n + 1);
+        pre_sum[0] = 0;
+        for (int i = 1; i <= n; ++i) {
+            pre_sum[i] += pre_sum[i - 1];
+        }
+        vector<vector<long long>> dp(n + 1, vector<long long>(m + 1));
+        for (int i = 1; i <= n; ++i) {
+            for (int j = 1; j <= min(i, m); ++j) {
+                for (int k = 0; k < i; ++k) {
+                    dp[i][j] = min(dp[i][j], max(dp[k][j - 1], pre_sum[i] - pre_sum[k]));
+                }
+            }
+        }
+        return dp[n][m];
+    }
+};

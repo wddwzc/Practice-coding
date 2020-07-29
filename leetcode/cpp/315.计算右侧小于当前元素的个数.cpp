@@ -18,7 +18,7 @@ class Solution {
         mergeAndCount(nums, 0, n - 1);
         //遍历获取统计结果
         for (int i = 0; i < n; i++) {
-            res.add(counter[i]);
+            res.push_back(counter[i]);
         }
         return res;
     }

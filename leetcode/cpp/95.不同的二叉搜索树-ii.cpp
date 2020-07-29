@@ -16,7 +16,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-// 递归实现  记忆化
+// 递归实现  记忆化  用一个三维vector
+// 这道题好像不要求每个树是独立的
 class Solution {
 public:
     vector<TreeNode*> generateTrees(int st,int ed) {
@@ -31,7 +32,7 @@ public:
                     TreeNode* root = new TreeNode(i,l,r);
                     ans.push_back(root);
                 }
-            }            
+            }
         }
         return memo[st][ed]=ans;        //3 记忆化添加得代码
     }
