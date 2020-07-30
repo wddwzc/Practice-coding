@@ -88,7 +88,7 @@ public:
 };
 
 
-// 动态规划
+// 动态规划  dp ij 是word1前i个和word2前j个匹配需要删除的次数
 class Solution {
 public:
     int minDistance(string word1, string word2) {
@@ -110,5 +110,32 @@ public:
             }
         }
         return dp[len1][len2];
+    }
+};
+
+
+// 一维动态规划
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int len1 = word1.length(), len2 = word2.length();
+        if (len1 == 0 || len2 == 0)  return max(len1, len2);
+        vector<int> dp(len2 + 1);
+        for (int i = 0; i <= len2; ++i) {
+            dp[i] = i;
+        }
+        for (int i = 1; i <= len1; ++i) {
+            int lt = dp[0];
+            dp[0] = i;
+            for (int j = 1; j <= len2; ++j) {
+                int temp = lt;
+                lt = dp[j];
+                dp[j] = min(dp[j], dp[j - 1]) + 1;
+                if (word1[i - 1] == word2[j - 1]) {
+                    dp[j] = min(dp[j], temp);
+                }
+            }
+        }
+        return dp[len2];
     }
 };
