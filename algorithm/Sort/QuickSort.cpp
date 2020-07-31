@@ -6,6 +6,7 @@ using namespace std;
 // 快速排序（分治思想）
 class QuickSort {
 public:
+    // 递归
     void sort_recursion(vector<int> &a) {
         sort_recursion(a, 0, a.size() - 1);
     }
@@ -20,25 +21,6 @@ public:
         // 对右半部分排序
         sort_recursion(a, i + 1, hi);
     }
-
-    void sort_quick3way(vector<int> & a) {
-        sort_quick3way(a, 0, a.size() - 1);
-    }
-    void sort_quick3way(vector<int> &a, int lo, int hi) {
-        if (hi <= lo)  return;
-        int lt = lo, i = lo + 1, gt = hi;
-        int split_n = a[lo];
-        while (i <= gt) {
-            if (a[i] < split_n)         swap(a[lt++], a[i++]);
-            else if (a[i] > split_n)    swap(a[i], a[gt--]);
-            else                        i++;
-        }
-        // 现在 a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi]成立
-        sort_quick3way(a, lo, lt - 1);
-        sort_quick3way(a, gt + 1, hi);
-    }
-
-
     // 原地切分
     int partition(vector<int> &a, int lo, int hi) {
         int i = lo, j = hi + 1;
@@ -55,6 +37,24 @@ public:
         // 把split_n交换到分隔位置
         swap(a[lo], a[j]);
         return j;
+    }
+
+    // 三路
+    void sort_quick3way(vector<int> & a) {
+        sort_quick3way(a, 0, a.size() - 1);
+    }
+    void sort_quick3way(vector<int> &a, int lo, int hi) {
+        if (hi <= lo)  return;
+        int lt = lo, i = lo + 1, gt = hi;
+        int split_n = a[lo];
+        while (i <= gt) {
+            if (a[i] < split_n)         swap(a[lt++], a[i++]);
+            else if (a[i] > split_n)    swap(a[i], a[gt--]);
+            else                        i++;
+        }
+        // 现在 a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi]成立
+        sort_quick3way(a, lo, lt - 1);
+        sort_quick3way(a, gt + 1, hi);
     }
 };
 
