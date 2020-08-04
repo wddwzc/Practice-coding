@@ -1,23 +1,38 @@
 #include <iostream>
-
+#include <string>
+#include <vector>
 using namespace std;
+
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        if (num1 == "0" || num2 == "0")  return "0";
+        int m = num1.length(), n = num2.length();
+        vector<int> median(m + n, 0);
+        int sum, n1, n2;
+        for (int i = m - 1; i >= 0; --i) {
+            n1 = num1[i] - '0';
+            for (int j = n - 1; i >= 0; --j) {
+                n2 = num2[j] - '0';
+                sum = n1 * n2 + median[i + j + 1];
+                median[i + j + 1] = sum % 10;
+                median[i + j] = sum / 10;
+            }
+        }
+        string res;
+        for (int i = 0; i < m + n; ++i) {
+            if (i == 0 && median[i] == 0) continue;
+            res.push_back(median[i] + '0');
+        }
+        return res;
+    }
+};
 
 int main()
 {
-    long long T, l, r;
-    cin >> T;
-    int *hist = new int[1000000000];
-    long long min_ = 0, temp;
-    while (T > 0) {
-        cin >> l >> r;
-        int count = 0, temp;
-        min_ = min(min_, l);
-        for (long long i = min_; i <= r; ++i) {
-            if (temp < 10) {
-                if ()
-            }
-        }
-    }
+    Solution sol;
+    cout << sol.multiply("123", "456") << endl;
+    system("pause");
     return 0;
 }
 
