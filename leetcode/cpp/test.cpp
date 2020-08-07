@@ -1,89 +1,136 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+int a[5] = {1,2,3,4,5};
+
+int main()
+{
+    int *p = a;
+    printf("%d", *p++);
+    printf("%d", (*p)++);
+    printf("%d", *++p);
+    printf("%d", ++*p);
+    system("pause");
+    return 0;
+}
+
+// #include <iostream>
+// #include <string>
+// using namespace std;
+ 
+// int huiwen(int n)    //判断回文数（详解在我BLOG里有）
+// {
+//     int x = 0;
+//     int s = n;
+//     while(s > 0) {
+//         x = x * 10 + s % 10;
+//         s = s / 10;
+//     }
+//     if(x==n) {
+//         return 1;
+//     }
+//     else {
+//         return 0;
+//     }
+// }
+ 
+// int sushu(int n)    //判断素数
+// {
+//     int x = n;
+//     int i;
+//     if (n == 0 || n == 1) {
+//         return 0;
+//     }
+//     for(i = 2; i <= n - 1; i++) {
+//         if(x % i == 0)
+//             return 0;
+//     }
+//     return 1;
+// }
+
+// int main()
+// {
+//     int n,m;
+//     cin >> n >> m;
+//     int ans = 0;
+
+//     for (int i = n; i <= m; i++) {
+//         string cur_str = to_string(i);
+//         string pre = "", last = cur_str;
+//         int len = cur_str.size();
+//         for (int i = 0; i < len; ++i) {
+//             string now_str = cur_str.substr(i + 1, len - i - 1);
+//             string now_num = pre + now_str;
+//             cout << now_num << endl;
+//             int num = stoi(now_num);
+//             pre.push_back(cur_str[i]);
+//             if(huiwen(i) && sushu(i)) {
+//                 //cout << i << " ";
+//                 ans++;
+//             }
+//         }
+//     }
+//     cout << ans << endl;
+//     system("pause");
+//     return 0;
+// }
+
+// #include <iostream>
+// #include <string>
+// using namespace std;
+ 
+// int huiwen(int n)    //判断回文数（详解在我BLOG里有）
+// {
+//     int x = 0;
+//     int s = n;
+//     while(s > 0) {
+//         x = x * 10 + s % 10;
+//         s = s / 10;
+//     }
+//     if(x==n) {
+//         return 1;
+//     }
+//     else {
+//         return 0;
+//     }
+// }
+ 
+// int sushu(int n)    //判断素数
+// {
+//     int x = n;
+//     int i;
+//     for(i = 2; i <= n - 1; i++) {
+//         if(x % i == 0)
+//             return 0;
+//     }
+//     return 1;
+// }
+
+// int main()
+// {
+//     int n,m;
+//     cin >> n >> m;
+//     int ans = 0;
+
+//     string max_str = to_string(m);
+//     string min_str = to_string(n);
+//     min_str = string(max_str.size() - min_str.size(), '0') + min_str;
+//     for (int i = n; i <= m; i++) {
+//         string cur_str = max_str;
+//         for (int i = 0; i < cur_str.size(); ++i){
+//             string temp_str;
+//             for (int i = 0; i < )
+//         }
+
+
+//         if(huiwen(i) && sushu(i)) {
+//             cout << i << " ";
+//         }
+//     }
+//     system("pause");
+//     return 0;
+// }
 
 
 // #include <iostream>
