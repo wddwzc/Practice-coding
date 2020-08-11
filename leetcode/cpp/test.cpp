@@ -2,15 +2,29 @@
 #include <iostream>
 using namespace std;
 
-int a[5] = {1,2,3,4,5};
+#pragma pack(4)
+struct data {
+    char a;
+    struct {
+        char a[5];
+        short b;
+    } s;
+    union {
+        char a[9];
+        int b;
+        // char c;
+    }u;
+    short b;
+    double c;
+    char d;
+} Data;
 
 int main()
 {
-    int *p = a;
-    printf("%d", *p++);
-    printf("%d", (*p)++);
-    printf("%d", *++p);
-    printf("%d", ++*p);
+    struct data d;
+    cout << sizeof(d) << endl;
+    cout << sizeof(d.s) << endl;
+    cout << sizeof(d.u) << endl;
     system("pause");
     return 0;
 }

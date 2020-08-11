@@ -24,25 +24,28 @@ void Getnext(vector<int> &next, string t)
     }
 }
 
-int KMP(string s, string t)
+int KMP(string src, string match)
 {
-    vector<int> next(t.length());
+    int lens = src.length(), lent = match.length();
+    vector<int> next(match.length());
     int i = 0, j = 0;
-    Getnext(next, t);
-    while(i < s.length() && j < t.length()) {
-        cout << i << " " << j << endl;
-        if(j == -1 || s[i] == t[j]) {
+    Getnext(next, match);
+    // 这里如果用 src.length()  match.length()
+    // 会出现莫名其妙的错误，不知道为啥
+    while(i < lens && j < lent) {
+        if(j == -1 || src[i] == match[j]) {
             i++;
             j++;
         }
         else {
-            j = next[j];  //j回退
+            //j回退
+            j = next[j];
         }
     }
     //匹配成功，返回子串的位置
-    if(j >= t.length()) {
-        cout << i << " " << t.length() << endl;
-        return (i - t.length());
+    if(j >= match.length()) {
+        // cout << i << " " << match.length() << endl;
+        return (i - match.length());
     }
     //没找到
     return -1;
@@ -52,7 +55,16 @@ int main()
 {
     string src = "ABCDEFGABCABERK";
     string target = "ABCABE";
-    cout << KMP(src, target) << endl;
+    cout << "Src:    " << src << endl;
+    cout << "Target: " << target << endl;
+    int pos = KMP(src, target);
+    string blank = "";
+    if (pos) {
+        blank = string(pos, ' ');
+    }
+    cout << endl << "KMP result:" << endl;
+    cout << src << endl;
+    cout << blank + target << endl;
     system("pause");
     return 0;
 }
