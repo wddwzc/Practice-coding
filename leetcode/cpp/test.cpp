@@ -1,57 +1,113 @@
+#include <stdio.h>
 #include <iostream>
-#include <stack>
-#include <unordered_map>
 using namespace std;
 
-
-void processData() {
-    int N;
-    cin >> N;
-    int res = 1;
-    int dura = 0, pre_time, max_ = INT_MIN;
-    stack<int> tasks;
-    unordered_map<int, int> time_cost;
-    for (int i = 0; i < N; ++i) {
-        int time, index, state;
-        cin >> time >> index >> state;
-        if (tasks.empty()) {
-            tasks.push(index);
-        }
-        else {
-            dura = time - pre_time;
-            // 结束
-            if (state) {
-                tasks.pop();
-                time_cost[index] += dura;
-                if (max_ < time_cost[index]) {
-                    max_ = time_cost[index];
-                    res = index;
-                }
-                else if (max_ == time_cost[index]) {
-                    res = min(index, res);
-                }
-            }
-            // 开始
-            else {
-                time_cost[tasks.top()] += dura;
-                tasks.push(index);
-            }
-        }
-        pre_time = time;
+double fun(double a1,double a2,int b)
+{
+    switch(b) {
+        case 0: return (a1 + a2);
+        case 1: return (a1 - a2);
+        case 2: return (a1 * a2);
+        case 3: return (a1 / a2);
     }
-    cout << res << endl;
-    return;
 }
-
 
 int main()
 {
-    int T;
-    cin >> T;
-    for (int p = 0; p < T; ++p)  processData();
+    int i,j,k,l,n,m,r,save[4];
+    double num[4]={1,1,1,1}, tem1, tem2, tem3, abc = 1111;
+    char sign[5]="+-*/";
+    printf("input 4 numbers:");
+    for(i = 0; i < 4; i++) {
+        scanf("%lf",num+i); save[i]=num[i];}
+    for(i = 0; i < 4; i++)
+    for(j = 0; j < 4; j++)
+    if(j != i) {
+        for(k=0;k<4;k++)
+            if(k!=i&&k!=j) {
+                for(l=0;l<4;l++)
+                if(l!=i&&l!=j&&l!=k) {
+                    for(n=0;n<4;n++)
+                        for(m=0;m<4;m++)
+                            for(r=0;r<4;r++) {
+                                tem1 = fun(num[i],num[j],n);
+                                tem2 = fun(tem1,num[k],m);
+                                tem3 = fun(tem2,num[l],r);
+                                if(tem3==24.0)printf("{(%d%c%d)%c%d}%c%d=24\n",save[i],sign[n],save[j],sign[m],save[k],sign[r],save[l]);
+                                else if(tem3==-24.0)printf("{%d%c(%d%c%d)}%c%d=24\n",save[k],sign[m],save[i],sign[n],save[j],sign[r],save[l]);
+                                else if(tem3==1.0/24.0)printf("%d%c{(%d%c%d)%c%d}=24\n",save[l],sign[r],save[i],sign[n],save[j],sign[m],save[k]);
+                                else if(tem3==-1.0/24.0)printf("%d%c{%d%c(%d%c%d)}=24\n",save[l],sign[r],save[k],sign[n],save[i],sign[m],save[j]);
+                                else {
+                                    tem1=fun(num[i],num[j],n);
+                                    tem2=fun(num[k],num[l],r);
+                                    tem3=fun(tem1,tem2,m);
+                                    if(tem3==24.0)
+                                        printf("(%d%c%d)%c(%d%c%d)=24\n",save[i],sign[n],save[j],sign[m],save[k],sign[r],save[l]);
+                                }
+                            }
+                }
+            }
+    }
     system("pause");
     return 0;
 }
+
+
+
+// #include <iostream>
+// #include <stack>
+// #include <unordered_map>
+// using namespace std;
+
+
+// void processData() {
+//     int N;
+//     cin >> N;
+//     int res = 1;
+//     int dura = 0, pre_time, max_ = INT_MIN;
+//     stack<int> tasks;
+//     unordered_map<int, int> time_cost;
+//     for (int i = 0; i < N; ++i) {
+//         int time, index, state;
+//         cin >> time >> index >> state;
+//         if (tasks.empty()) {
+//             tasks.push(index);
+//         }
+//         else {
+//             dura = time - pre_time;
+//             // 结束
+//             if (state) {
+//                 tasks.pop();
+//                 time_cost[index] += dura;
+//                 if (max_ < time_cost[index]) {
+//                     max_ = time_cost[index];
+//                     res = index;
+//                 }
+//                 else if (max_ == time_cost[index]) {
+//                     res = min(index, res);
+//                 }
+//             }
+//             // 开始
+//             else {
+//                 time_cost[tasks.top()] += dura;
+//                 tasks.push(index);
+//             }
+//         }
+//         pre_time = time;
+//     }
+//     cout << res << endl;
+//     return;
+// }
+
+
+// int main()
+// {
+//     int T;
+//     cin >> T;
+//     for (int p = 0; p < T; ++p)  processData();
+//     system("pause");
+//     return 0;
+// }
 
 
 
