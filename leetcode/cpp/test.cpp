@@ -1,33 +1,92 @@
-#include <stdio.h>
 #include <iostream>
+#include <stack>
+#include <unordered_map>
 using namespace std;
 
-#pragma pack(4)
-struct data {
-    char a;
-    struct {
-        char a[5];
-        short b;
-    } s;
-    union {
-        char a[9];
-        int b;
-        // char c;
-    }u;
-    short b;
-    double c;
-    char d;
-} Data;
+
+void processData() {
+    int N;
+    cin >> N;
+    int res = 1;
+    int dura = 0, pre_time, max_ = INT_MIN;
+    stack<int> tasks;
+    unordered_map<int, int> time_cost;
+    for (int i = 0; i < N; ++i) {
+        int time, index, state;
+        cin >> time >> index >> state;
+        if (tasks.empty()) {
+            tasks.push(index);
+        }
+        else {
+            dura = time - pre_time;
+            // 结束
+            if (state) {
+                tasks.pop();
+                time_cost[index] += dura;
+                if (max_ < time_cost[index]) {
+                    max_ = time_cost[index];
+                    res = index;
+                }
+                else if (max_ == time_cost[index]) {
+                    res = min(index, res);
+                }
+            }
+            // 开始
+            else {
+                time_cost[tasks.top()] += dura;
+                tasks.push(index);
+            }
+        }
+        pre_time = time;
+    }
+    cout << res << endl;
+    return;
+}
+
 
 int main()
 {
-    struct data d;
-    cout << sizeof(d) << endl;
-    cout << sizeof(d.s) << endl;
-    cout << sizeof(d.u) << endl;
+    int T;
+    cin >> T;
+    for (int p = 0; p < T; ++p)  processData();
     system("pause");
     return 0;
 }
+
+
+
+
+
+// #include <stdio.h>
+// #include <iostream>
+// using namespace std;
+
+// #pragma pack(4)
+// struct data {
+//     char a;
+//     struct {
+//         char a[5];
+//         short b;
+//     } s;
+//     union {
+//         char a[9];
+//         int b;
+//         // char c;
+//     }u;
+//     short b;
+//     double c;
+//     char d;
+// } Data;
+
+// int main()
+// {
+//     struct data d;
+//     cout << sizeof(d) << endl;
+//     cout << sizeof(d.s) << endl;
+//     cout << sizeof(d.u) << endl;
+//     system("pause");
+//     return 0;
+// }
 
 // #include <iostream>
 // #include <string>
