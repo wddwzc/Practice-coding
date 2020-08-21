@@ -1,73 +1,121 @@
-#include <iostream>
-#include <string>
-#include <stack>
-#include <queue>
-using namespace std;
 
-struct TreeNode {
-    int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
-};
 
-class Solution {
-public:
-    TreeNode* catToTree(string* categories, int categoriesLen) {
-        stack<TreeNode*> path;
-        for (int i = 0; i < categoriesLen; ++i) {
-            string &cur_str = categories[i];
-            int level = cur_str.length() - 1;
-            int value = cur_str.back() - '0';
-            TreeNode* node = new TreeNode;
-            node->val = value;
-            node->left = nullptr;
-            node->right = nullptr;
-            if (level == path.size()) {
-                if (!path.empty()) {
-                    path.top()->left = node;
-                }
-            }
-            else {
-                while (level != path.size()) {
-                    path.pop();
-                }
-                path.top()->right = node;
-            }
-            path.push(node);
-        }
-        while (path.size() > 1) {
-            path.pop();
-        }
-        return path.top();
-    }
-};
 
-void BFS(TreeNode* node) {
-    queue<TreeNode*> que;
-    que.push(node);
-    while (!que.empty()) {
-        int n = que.size();
-        for (int i = 0; i < n; ++i) {
-            TreeNode* cur_node = que.front();
-            que.pop();
-            cout << cur_node->val << endl;
-            if (cur_node->left)  que.push(cur_node->left);
-            else cout << "#" << endl;
-            if (cur_node->right)  que.push(cur_node->right);
-            else cout << "#" << endl;
-        }
-    }
-    return;
-}
 
-int main()
-{
-    string input[5] = {"1", "\t2", "\t3", "\t\t4", "\t\t\t5"};
-    Solution sol;
-    BFS(sol.catToTree(input, 5));
-    system("pause");
-    return 0;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #include <iostream>
+// #include <string>
+// #include <stack>
+// #include <queue>
+// using namespace std;
+
+// struct TreeNode {
+//     int val;
+//     struct TreeNode *left;
+//     struct TreeNode *right;
+// };
+
+// class Solution {
+// public:
+//     TreeNode* catToTree(string* categories, int categoriesLen) {
+//         stack<TreeNode*> path;
+//         for (int i = 0; i < categoriesLen; ++i) {
+//             string &cur_str = categories[i];
+//             int level = cur_str.length() - 1;
+//             int value = cur_str.back() - '0';
+//             TreeNode* node = new TreeNode;
+//             node->val = value;
+//             node->left = nullptr;
+//             node->right = nullptr;
+//             if (level == path.size()) {
+//                 if (!path.empty()) {
+//                     path.top()->left = node;
+//                 }
+//             }
+//             else {
+//                 while (level != path.size()) {
+//                     path.pop();
+//                 }
+//                 path.top()->right = node;
+//             }
+//             path.push(node);
+//         }
+//         while (path.size() > 1) {
+//             path.pop();
+//         }
+//         return path.top();
+//     }
+// };
+
+// void BFS(TreeNode* node) {
+//     queue<TreeNode*> que;
+//     que.push(node);
+//     while (!que.empty()) {
+//         int n = que.size();
+//         for (int i = 0; i < n; ++i) {
+//             TreeNode* cur_node = que.front();
+//             que.pop();
+//             cout << cur_node->val << endl;
+//             if (cur_node->left)  que.push(cur_node->left);
+//             else cout << "#" << endl;
+//             if (cur_node->right)  que.push(cur_node->right);
+//             else cout << "#" << endl;
+//         }
+//     }
+//     return;
+// }
+
+// int main()
+// {
+//     string input[5] = {"1", "\t2", "\t3", "\t\t4", "\t\t\t5"};
+//     Solution sol;
+//     BFS(sol.catToTree(input, 5));
+//     system("pause");
+//     return 0;
+// }
 
 
 
