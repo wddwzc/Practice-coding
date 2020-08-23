@@ -11,10 +11,10 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "8.1",
-            "compilerPath": "E:/Application/IDE/Mingw64/mingw64/bin/g++.exe",
+            "compilerPath": "E:/Application/IDE/VisualStudio2015/VC/bin/cl.exe",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "gcc-x64"
+            "intelliSenseMode": "msvc-x64"
         }
     ],
     "version": 4

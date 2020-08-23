@@ -46,6 +46,186 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #include <iostream>
+// #include <sstream>
+// #include <string>
+// #include <vector>
+// using namespace std;
+
+
+// int main()
+// {
+//     string input, str, match;
+//     getline(cin, input);
+//     cin >> match;
+//     vector<int> breakpoint;
+//     vector<string> str_list;
+//     stringstream instr(input);
+//     string full_str = "";
+//     // 输入的时候 存一个去空格的string，一个按word存的序列
+//     while (instr >> str) {
+//         str_list.push_back(str);
+//         full_str += str;
+//         cout << str << endl;
+//     }
+//     cout << full_str << endl;
+//     // // 找到每个 match 的位置
+//     int pos = 0;
+//     while ((pos = full_str.find(match, pos)) != full_str.npos) {
+//         breakpoint.push_back(pos);
+//     }
+
+//     // 找到和match相关的word，进行处理
+//     int cur_pos = 0;
+//     int j = 0;
+//     vector<string> res;
+//     for (int i = 0; i < breakpoint.size(); ++i) {
+//         while (cur_pos >= breakpoint[i]) {
+//             res.push_back(str_list[j]);
+//             cur_pos += str_list[j].size();
+//             ++j;
+//         }
+        
+//     }
+//     system("pause");
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #include <stdio.h>
+// #include <iostream>
+// using namespace std;
+
+// double fun(double a1,double a2,int b)
+// {
+//     switch(b) {
+//         case 0: return (a1 + a2);
+//         case 1: return (a1 - a2);
+//         case 2: return (a1 * a2);
+//         case 3: return (a1 / a2);
+//     }
+// }
+
+// int main()
+// {
+//     int i,j,k,l,n,m,r,save[4];
+//     double num[4]={1,1,1,1}, tem1, tem2, tem3, abc = 1111;
+//     char sign[5]="+-*/";
+//     printf("input 4 numbers:");
+//     for(i = 0; i < 4; i++) {
+//         scanf("%lf",num+i); save[i]=num[i];}
+//     for(i = 0; i < 4; i++)
+//     for(j = 0; j < 4; j++)
+//     if(j != i) {
+//         for(k=0;k<4;k++)
+//             if(k!=i&&k!=j) {
+//                 for(l=0;l<4;l++)
+//                 if(l!=i&&l!=j&&l!=k) {
+//                     for(n=0;n<4;n++)
+//                         for(m=0;m<4;m++)
+//                             for(r=0;r<4;r++) {
+//                                 tem1 = fun(num[i],num[j],n);
+//                                 tem2 = fun(tem1,num[k],m);
+//                                 tem3 = fun(tem2,num[l],r);
+//                                 if(tem3==24.0)printf("{(%d%c%d)%c%d}%c%d=24\n",save[i],sign[n],save[j],sign[m],save[k],sign[r],save[l]);
+//                                 else if(tem3==-24.0)printf("{%d%c(%d%c%d)}%c%d=24\n",save[k],sign[m],save[i],sign[n],save[j],sign[r],save[l]);
+//                                 else if(tem3==1.0/24.0)printf("%d%c{(%d%c%d)%c%d}=24\n",save[l],sign[r],save[i],sign[n],save[j],sign[m],save[k]);
+//                                 else if(tem3==-1.0/24.0)printf("%d%c{%d%c(%d%c%d)}=24\n",save[l],sign[r],save[k],sign[n],save[i],sign[m],save[j]);
+//                                 else {
+//                                     tem1=fun(num[i],num[j],n);
+//                                     tem2=fun(num[k],num[l],r);
+//                                     tem3=fun(tem1,tem2,m);
+//                                     if(tem3==24.0)
+//                                         printf("(%d%c%d)%c(%d%c%d)=24\n",save[i],sign[n],save[j],sign[m],save[k],sign[r],save[l]);
+//                                 }
+//                             }
+//                 }
+//             }
+//     }
+//     system("pause");
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
 // #include <iostream>
 // #include <string>
 // #include <stack>
@@ -119,59 +299,7 @@
 
 
 
-// #include <stdio.h>
-// #include <iostream>
-// using namespace std;
 
-// double fun(double a1,double a2,int b)
-// {
-//     switch(b) {
-//         case 0: return (a1 + a2);
-//         case 1: return (a1 - a2);
-//         case 2: return (a1 * a2);
-//         case 3: return (a1 / a2);
-//     }
-// }
-
-// int main()
-// {
-//     int i,j,k,l,n,m,r,save[4];
-//     double num[4]={1,1,1,1}, tem1, tem2, tem3, abc = 1111;
-//     char sign[5]="+-*/";
-//     printf("input 4 numbers:");
-//     for(i = 0; i < 4; i++) {
-//         scanf("%lf",num+i); save[i]=num[i];}
-//     for(i = 0; i < 4; i++)
-//     for(j = 0; j < 4; j++)
-//     if(j != i) {
-//         for(k=0;k<4;k++)
-//             if(k!=i&&k!=j) {
-//                 for(l=0;l<4;l++)
-//                 if(l!=i&&l!=j&&l!=k) {
-//                     for(n=0;n<4;n++)
-//                         for(m=0;m<4;m++)
-//                             for(r=0;r<4;r++) {
-//                                 tem1 = fun(num[i],num[j],n);
-//                                 tem2 = fun(tem1,num[k],m);
-//                                 tem3 = fun(tem2,num[l],r);
-//                                 if(tem3==24.0)printf("{(%d%c%d)%c%d}%c%d=24\n",save[i],sign[n],save[j],sign[m],save[k],sign[r],save[l]);
-//                                 else if(tem3==-24.0)printf("{%d%c(%d%c%d)}%c%d=24\n",save[k],sign[m],save[i],sign[n],save[j],sign[r],save[l]);
-//                                 else if(tem3==1.0/24.0)printf("%d%c{(%d%c%d)%c%d}=24\n",save[l],sign[r],save[i],sign[n],save[j],sign[m],save[k]);
-//                                 else if(tem3==-1.0/24.0)printf("%d%c{%d%c(%d%c%d)}=24\n",save[l],sign[r],save[k],sign[n],save[i],sign[m],save[j]);
-//                                 else {
-//                                     tem1=fun(num[i],num[j],n);
-//                                     tem2=fun(num[k],num[l],r);
-//                                     tem3=fun(tem1,tem2,m);
-//                                     if(tem3==24.0)
-//                                         printf("(%d%c%d)%c(%d%c%d)=24\n",save[i],sign[n],save[j],sign[m],save[k],sign[r],save[l]);
-//                                 }
-//                             }
-//                 }
-//             }
-//     }
-//     system("pause");
-//     return 0;
-// }
 
 
 
