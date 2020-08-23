@@ -14,6 +14,10 @@ public:
 // @lc code=end
 
 
+
+// 马拉车算法 很合适 但不会
+
+
 // 中心扩展法
 class Solution {
 public:
@@ -41,7 +45,7 @@ public:
 
 
 
-// 
+// 动态规划
 class Solution {
 public:
     int countSubstrings(string s) {
