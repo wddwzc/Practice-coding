@@ -61,7 +61,6 @@ int UF::Count() {
     return count;
 }
 
-
 int main() {
     int N = 10;
     UF uf(N);
