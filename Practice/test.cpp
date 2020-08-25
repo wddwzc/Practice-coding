@@ -1,9 +1,6 @@
 #include <iostream>
-#include <unordered_map>
-#include <unordered_set>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -13,31 +10,15 @@ int main()
     getline(cin, input);
     int n, a, b;
     cin >> n;
-    vector<unordered_set<int>> inv_map(10);
     vector<int> mapping(10);
     for (int i = 0; i < 10; ++i) {
         mapping[i] = i;
     }
     for (int p = 0; p < n; ++p) {
         cin >> a >> b;
-        
-        if (mapping[a] != a)  continue;
-
-        if (inv_map[b].find(a) == inv_map[b].end()) {
-            inv_map[b].insert(a);
-        }
-        
-        queue<int> dfs_q;
-        dfs_q.push(a);
-        while (!dfs_q.empty()) {
-            int nn = dfs_q.size();
-            for (int i = 0; i < nn; ++i) {
-                int cur_num = dfs_q.front();
-                dfs_q.pop();
-                mapping[cur_num] = b;
-                for (auto ele : inv_map[cur_num]) {
-                    dfs_q.push(ele);
-                }
+        for (int i = 0; i < 10; ++i) {
+            if (mapping[i] == a) {
+                mapping[i] = b;
             }
         }
     }
@@ -45,7 +26,7 @@ int main()
     for (auto &ch : input) {
         int val = ch - '0';
         if (mapping[val] != val) {
-            ch = val + '0';
+            ch = mapping[val] + '0';
         }
     }
     cout << input << endl;
