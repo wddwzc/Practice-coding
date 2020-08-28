@@ -1,3 +1,21 @@
+#include <iostream>
+
+using namespace std;
+
+int fun6(int a) {
+    return 1;
+}
+
+int (*pf)(int) = fun6;
+
+int main()
+{
+    cout << (&pf) (256);
+    system("pause");
+    return 0;
+}
+
+
 // #include <iostream>
 // #include <vector>
 // #include <string>
