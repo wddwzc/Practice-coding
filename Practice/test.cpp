@@ -2,18 +2,92 @@
 
 using namespace std;
 
-int fun6(int a) {
-    return 1;
-}
+// class Test {
+//     static int x;
+// public:
+//     Test() {x++;}
+//     static int getX() {return x;}
+// };
 
-int (*pf)(int) = fun6;
+// int Test::x = 0;
+// int main()
+// {
+//     cout << Test::getX() << " ";
+//     Test t[5];
+//     cout << Test::getX();
+//     system("pause");
+// }
+
+class A {
+public:
+    A() {
+        cout << "Constructor calles\n";
+    }
+    ~A() {
+        cout << "Destructor called\n";
+    }
+};
 
 int main()
 {
-    cout << (&pf) (256);
+    A *a = new A[5];
+    delete a;
     system("pause");
     return 0;
 }
+
+
+
+
+
+// #include <iostream>
+// #include <vector>
+
+// using namespace std;
+
+// int main()
+// {
+//     int n;
+//     cin >> n;
+//     vector<bool> visited(n, false);
+//     vector<int> res(n, -1);
+//     for (int i = 0; i < n; ++i) {
+//         int input;
+//         for (int j = 0; j < n; ++j) {
+//             cin >> input;
+//             if (res[i] == -1) {
+//                 if (!visited[input]) {
+//                     res[i] = input;
+//                     visited[input] = true;
+//                 }
+//             }
+//         }
+//     }
+//     for (auto &r : res) {
+//         cout << r << " ";
+//     }
+//     cout << endl;
+//     // system("pause");
+//     return 0;
+// }
+
+
+// #include <iostream>
+
+// using namespace std;
+
+// int fun6(int a) {
+//     return 1;
+// }
+
+// int (*pf)(int) = fun6;
+
+// int main()
+// {
+//     cout << (&pf) (256);
+//     system("pause");
+//     return 0;
+// }
 
 
 // #include <iostream>

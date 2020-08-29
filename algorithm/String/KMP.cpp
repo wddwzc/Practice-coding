@@ -58,13 +58,18 @@ int main()
     cout << "Src:    " << src << endl;
     cout << "Target: " << target << endl;
     int pos = KMP(src, target);
-    string blank = "";
-    if (pos) {
-        blank = string(pos, ' ');
+    if (pos >= 0) {
+        string blank = "";
+        if (pos) {
+            blank = string(pos, ' ');
+        }
+        cout << endl << "KMP result:" << endl;
+        cout << src << endl;
+        cout << blank + target << endl;
     }
-    cout << endl << "KMP result:" << endl;
-    cout << src << endl;
-    cout << blank + target << endl;
+    else {
+        cout << "no match" << endl;
+    }
     system("pause");
     return 0;
 }
