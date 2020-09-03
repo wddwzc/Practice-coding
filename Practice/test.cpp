@@ -1,38 +1,51 @@
 #include <iostream>
-#include <vector>
-#include <string>
-using namespace std;
 
+using namespace std;
 
 int main()
 {
-    string input;
-    getline(cin, input);
-    int n, a, b;
-    cin >> n;
-    vector<int> mapping(10);
-    for (int i = 0; i < 10; ++i) {
-        mapping[i] = i;
-    }
-    for (int p = 0; p < n; ++p) {
-        cin >> a >> b;
-        for (int i = 0; i < 10; ++i) {
-            if (mapping[i] == a) {
-                mapping[i] = b;
-            }
-        }
-    }
-    
-    for (auto &ch : input) {
-        int val = ch - '0';
-        if (mapping[val] != val) {
-            ch = mapping[val] + '0';
-        }
-    }
-    cout << input << endl;
+    int *a;
+    cout << sizeof(a) << endl;
     system("pause");
     return 0;
 }
+
+
+// #include <iostream>
+// #include <vector>
+// #include <string>
+// using namespace std;
+
+
+// int main()
+// {
+//     string input;
+//     getline(cin, input);
+//     int n, a, b;
+//     cin >> n;
+//     vector<int> mapping(10);
+//     for (int i = 0; i < 10; ++i) {
+//         mapping[i] = i;
+//     }
+//     for (int p = 0; p < n; ++p) {
+//         cin >> a >> b;
+//         for (int i = 0; i < 10; ++i) {
+//             if (mapping[i] == a) {
+//                 mapping[i] = b;
+//             }
+//         }
+//     }
+    
+//     for (auto &ch : input) {
+//         int val = ch - '0';
+//         if (mapping[val] != val) {
+//             ch = mapping[val] + '0';
+//         }
+//     }
+//     cout << input << endl;
+//     system("pause");
+//     return 0;
+// }
 
 
 
