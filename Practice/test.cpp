@@ -51,6 +51,96 @@ int main()
 
 
 
+// #include <iostream>
+// #include <vector>
+
+// using namespace std;
+
+// int main()
+// {
+//     int n;
+//     cin >> n;
+//     vector<bool> visited(n, false);
+//     vector<int> res(n, -1);
+//     for (int i = 0; i < n; ++i) {
+//         int input;
+//         for (int j = 0; j < n; ++j) {
+//             cin >> input;
+//             if (res[i] == -1) {
+//                 if (!visited[input]) {
+//                     res[i] = input;
+//                     visited[input] = true;
+//                 }
+//             }
+//         }
+//     }
+//     for (auto &r : res) {
+//         cout << r << " ";
+//     }
+//     cout << endl;
+//     // system("pause");
+//     return 0;
+// }
+
+
+// #include <iostream>
+
+// using namespace std;
+
+// int fun6(int a) {
+//     return 1;
+// }
+
+// int (*pf)(int) = fun6;
+
+// int main()
+// {
+//     cout << (&pf) (256);
+//     system("pause");
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <vector>
+// #include <string>
+// using namespace std;
+
+
+// int main()
+// {
+//     string input;
+//     getline(cin, input);
+//     int n, a, b;
+//     cin >> n;
+//     vector<int> mapping(10);
+//     for (int i = 0; i < 10; ++i) {
+//         mapping[i] = i;
+//     }
+//     for (int p = 0; p < n; ++p) {
+//         cin >> a >> b;
+//         for (int i = 0; i < 10; ++i) {
+//             if (mapping[i] == a) {
+//                 mapping[i] = b;
+//             }
+//         }
+//     }
+    
+//     for (auto &ch : input) {
+//         int val = ch - '0';
+//         if (mapping[val] != val) {
+//             ch = mapping[val] + '0';
+//         }
+//     }
+//     cout << input << endl;
+//     system("pause");
+//     return 0;
+// }
+
+
+
+
+
 
 
 
