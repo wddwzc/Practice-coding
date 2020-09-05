@@ -1,11 +1,13 @@
 #include <iostream>
+// #include "test.h"
 
 using namespace std;
 
+extern int a;
+
 int main()
 {
-    int *a;
-    cout << sizeof(a) << endl;
+    cout << a++ << endl;
     system("pause");
     return 0;
 }
