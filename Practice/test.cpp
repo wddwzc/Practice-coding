@@ -1,16 +1,29 @@
 #include <iostream>
-// #include "test.h"
-
+#include <memory>
 using namespace std;
-
-extern int a;
 
 int main()
 {
-    cout << a++ << endl;
+    unique_ptr<int> p(new int(2));
+    cout << sizeof(p) << endl;
     system("pause");
     return 0;
 }
+
+
+// #include <iostream>
+// // #include "test.h"
+
+// using namespace std;
+
+// extern int a;
+
+// int main()
+// {
+//     cout << a++ << endl;
+//     system("pause");
+//     return 0;
+// }
 
 
 // #include <iostream>
