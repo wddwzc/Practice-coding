@@ -6,9 +6,92 @@ int main()
 {
     unique_ptr<int> p(new int(2));
     cout << sizeof(p) << endl;
+}
+
+
+#include <random>
+#include <vector>
+#include <time.h>
+using namespace std;
+
+class Solution {
+public:
+    int maxPoints(vector<vector<int>>& points) {
+        int n = points.size();
+        // default_random_engine e;
+        int inlier = 0;
+        srand((unsigned)time(NULL));
+        for (int p = 0; p < 200; ++p) {
+            int ind1 = rand() % n;
+            int ind2 = rand() % n;
+            while (ind1 == ind2) {
+                ind2 = rand() % n;
+            }
+            // cout << ind1 << " " << ind2 << endl;
+            int new_inlier = 2;
+            for (int i = 0; i < n; ++i) {
+                if (i != ind1 && i != ind2) {
+                    double x1 = points[ind1][0], y1 = points[ind1][1];
+                    double x2 = points[ind2][0], y2 = points[ind2][1];
+                    double x0 = points[i][0], y0 = points[i][1];
+                    if (fabs((y1 - y0) * (x2 - x0) - (y2 - y0) * (x1 - x0)) < 1e-8) {
+                        ++new_inlier;
+                    }
+                }
+            }
+            inlier = max(inlier, new_inlier);
+            // cout << inlier << endl;
+        }
+        return inlier;
+    }
+};
+
+int main()
+{
+    Solution sol;
+    vector<vector<int>> data = {{1,1}, {3,2}, {5,3}, {4,1}, {2,3}, {1,4}};
+    cout << sol.maxPoints(data) << endl;
     system("pause");
     return 0;
 }
+
+
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// struct Test {
+//     int8_t a;
+//     int16_t b;
+//     int32_t c;
+// };
+
+// int main() {
+//     Test t;
+//     printf("a:%d,b:%d,c:%d\n",sizeof(t.a),sizeof(t.b),sizeof(t.c));
+//     cout << "struct:" << sizeof(t) << endl;
+//     system("pause");
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// // #include "test.h"
+
+// using namespace std;
+
+// extern int a;
+
+// int main()
+// {
+//     cout << a++ << endl;
+//     system("pause");
+//     return 0;
+// }
 
 
 // #include <iostream>
