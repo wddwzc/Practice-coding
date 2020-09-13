@@ -1,4 +1,14 @@
 #include <iostream>
+#include <memory>
+using namespace std;
+
+int main()
+{
+    unique_ptr<int> p(new int(2));
+    cout << sizeof(p) << endl;
+}
+
+
 #include <random>
 #include <vector>
 #include <time.h>
@@ -67,6 +77,21 @@ int main()
 //     return 0;
 // }
 
+
+
+// #include <iostream>
+// // #include "test.h"
+
+// using namespace std;
+
+// extern int a;
+
+// int main()
+// {
+//     cout << a++ << endl;
+//     system("pause");
+//     return 0;
+// }
 
 
 // #include <iostream>
