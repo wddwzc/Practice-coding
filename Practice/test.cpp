@@ -1,59 +1,80 @@
-#include <iostream>
-#include <memory>
-using namespace std;
+// #include <bits/stdc++.h>
+// using namespace std;
 
-int main()
-{
-    unique_ptr<int> p(new int(2));
-    cout << sizeof(p) << endl;
-}
+// class Base {
+// public:
+//     int base_a;
+//     virtual void myfunc() {
+//         cout << "I am Base" << endl;
+//     }
+// };
+
+// int main()
+// {
+//     cout << sizeof(Base) << endl;
+//     int a[2][3];
+//     a[1>2][!1] = 1;
+//     system("pause");
+//     return 0;
+// }
 
 
-#include <random>
-#include <vector>
-#include <time.h>
-using namespace std;
+// #include <iostream>
+// #include <memory>
+// using namespace std;
 
-class Solution {
-public:
-    int maxPoints(vector<vector<int>>& points) {
-        int n = points.size();
-        // default_random_engine e;
-        int inlier = 0;
-        srand((unsigned)time(NULL));
-        for (int p = 0; p < 200; ++p) {
-            int ind1 = rand() % n;
-            int ind2 = rand() % n;
-            while (ind1 == ind2) {
-                ind2 = rand() % n;
-            }
-            // cout << ind1 << " " << ind2 << endl;
-            int new_inlier = 2;
-            for (int i = 0; i < n; ++i) {
-                if (i != ind1 && i != ind2) {
-                    double x1 = points[ind1][0], y1 = points[ind1][1];
-                    double x2 = points[ind2][0], y2 = points[ind2][1];
-                    double x0 = points[i][0], y0 = points[i][1];
-                    if (fabs((y1 - y0) * (x2 - x0) - (y2 - y0) * (x1 - x0)) < 1e-8) {
-                        ++new_inlier;
-                    }
-                }
-            }
-            inlier = max(inlier, new_inlier);
-            // cout << inlier << endl;
-        }
-        return inlier;
-    }
-};
+// int main()
+// {
+//     unique_ptr<int> p(new int(2));
+//     cout << sizeof(p) << endl;
+// }
 
-int main()
-{
-    Solution sol;
-    vector<vector<int>> data = {{1,1}, {3,2}, {5,3}, {4,1}, {2,3}, {1,4}};
-    cout << sol.maxPoints(data) << endl;
-    system("pause");
-    return 0;
-}
+
+// #include <random>
+// #include <vector>
+// #include <time.h>
+// using namespace std;
+
+// class Solution {
+// public:
+//     int maxPoints(vector<vector<int>>& points) {
+//         int n = points.size();
+//         // default_random_engine e;
+//         int inlier = 0;
+//         srand((unsigned)time(NULL));
+//         for (int p = 0; p < 200; ++p) {
+//             int ind1 = rand() % n;
+//             int ind2 = rand() % n;
+//             while (ind1 == ind2) {
+//                 ind2 = rand() % n;
+//             }
+//             // cout << ind1 << " " << ind2 << endl;
+//             int new_inlier = 2;
+//             for (int i = 0; i < n; ++i) {
+//                 if (i != ind1 && i != ind2) {
+//                     double x1 = points[ind1][0], y1 = points[ind1][1];
+//                     double x2 = points[ind2][0], y2 = points[ind2][1];
+//                     double x0 = points[i][0], y0 = points[i][1];
+//                     if (fabs((y1 - y0) * (x2 - x0) - (y2 - y0) * (x1 - x0)) < 1e-8) {
+//                         ++new_inlier;
+//                     }
+//                 }
+//             }
+//             inlier = max(inlier, new_inlier);
+//             // cout << inlier << endl;
+//         }
+//         return inlier;
+//     }
+// };
+
+// int main()
+// {
+//     Solution sol;
+//     vector<vector<int>> data = {{1,1}, {3,2}, {5,3}, {4,1}, {2,3}, {1,4}};
+//     cout << sol.maxPoints(data) << endl;
+//     system("pause");
+//     return 0;
+// }
 
 
 
