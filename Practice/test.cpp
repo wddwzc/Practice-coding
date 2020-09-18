@@ -1,3 +1,138 @@
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    A() {}
+    ~A() {}
+
+    static int a;
+};
+
+class B : public A {
+public:
+    B() {}
+    ~B() {}
+
+    //static int a;
+};
+
+int main()
+{
+    A aa;
+    B bb;
+    aa.a = 1;
+    bb.a = 2;
+    cout << aa.a << endl;
+    cout << bb.a << endl;
+    system("pause");
+    return 0;
+}
+
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main()
+// {
+//     vector<int> numbers = {2,2,2,0,0,0,0,1,1,1};
+//     int n = numbers.size();
+//     if (n == 1)  return numbers[0];
+//     int left = 0, right = n - 1, min_ = INT_MAX;
+//     while (left < right) {
+//         int mid = left + (right - left) / 2;
+//         if (numbers[mid] > numbers[right]) {
+//             left = mid + 1;
+//         }
+//         else if (numbers[mid] < numbers[right]) {
+//             right = mid;
+//         }
+//         else if(numbers[mid] == numbers[right]) {
+//             right--;
+//         }
+//     }
+//     cout << left << endl;
+//     system("pause");
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// string Encode(string str) {
+//     int sz = str.size();
+//     if (sz % 5 != 0) {
+//         int c = 5 - str.size() % 5;
+//         for (int i = 0; i < c; ++i) {
+//             str.push_back('=');
+//         }
+//     }
+//     string result;
+//     int index = 0;
+//     while(sz > 0) {
+//         char ch1 = str[index], ch2 = str[index + 1], ch3 = str[index + 2], ch4 = str[index + 3], ch5 = str[index + 4];
+//         result += (char)(ch1 >> 3);
+//         result += (char)(((ch1 & 0x07) << 2) + (ch2 >> 6));
+//         result += (char)((ch2 & 0x3e) >> 1);
+//         result += (char)(((ch2 & 0x01) << 4) + (ch3 >> 4));
+//         result += (char)((ch3 & 0x0f) + ch4 >> 7);
+//         result += (char)((ch4 & 0x7f) >> 2);
+//         result += (char)(((ch4 & 0x03) << 3) + (ch5 >> 5));
+//         result += (char)(ch5 & 0x1f);
+//         index += 5;
+//         sz -= 5;
+//     }
+//     return result;
+// }
+
+// int main()
+// {
+//     string input;
+//     getline(cin, input);
+//     cout << Encode(input) << endl;
+//     system("pause");
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A {
+// public:
+//     A() { a = 0;}
+//     friend void out();
+// private:
+//     int a;
+
+
+// };
+
+// A aaaa;
+
+// void out() {
+//     cout << aaaa.a << endl;
+// }
+
+// int main()
+// {
+
+//     long long a = 0x7fffffffffffffff;
+//     long long b = 0x8000000000000000;
+//     out();
+//     cout << a << endl;
+//     cout << b << endl;
+//     cout << a + b << endl;
+//     system("pause");
+//     return 0;
+// }
+
+
 // #include <bits/stdc++.h>
 // using namespace std;
 
