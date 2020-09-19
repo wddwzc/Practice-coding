@@ -1,59 +1,215 @@
 #include <iostream>
-#include <memory>
 using namespace std;
 
-int main()
-{
-    unique_ptr<int> p(new int(2));
-    cout << sizeof(p) << endl;
-}
-
-
-#include <random>
-#include <vector>
-#include <time.h>
-using namespace std;
-
-class Solution {
+class A {
 public:
-    int maxPoints(vector<vector<int>>& points) {
-        int n = points.size();
-        // default_random_engine e;
-        int inlier = 0;
-        srand((unsigned)time(NULL));
-        for (int p = 0; p < 200; ++p) {
-            int ind1 = rand() % n;
-            int ind2 = rand() % n;
-            while (ind1 == ind2) {
-                ind2 = rand() % n;
-            }
-            // cout << ind1 << " " << ind2 << endl;
-            int new_inlier = 2;
-            for (int i = 0; i < n; ++i) {
-                if (i != ind1 && i != ind2) {
-                    double x1 = points[ind1][0], y1 = points[ind1][1];
-                    double x2 = points[ind2][0], y2 = points[ind2][1];
-                    double x0 = points[i][0], y0 = points[i][1];
-                    if (fabs((y1 - y0) * (x2 - x0) - (y2 - y0) * (x1 - x0)) < 1e-8) {
-                        ++new_inlier;
-                    }
-                }
-            }
-            inlier = max(inlier, new_inlier);
-            // cout << inlier << endl;
-        }
-        return inlier;
-    }
+    A() {}
+    ~A() {}
+
+    static int a;
+};
+
+class B : public A {
+public:
+    B() {}
+    ~B() {}
+
+    //static int a;
 };
 
 int main()
 {
-    Solution sol;
-    vector<vector<int>> data = {{1,1}, {3,2}, {5,3}, {4,1}, {2,3}, {1,4}};
-    cout << sol.maxPoints(data) << endl;
+    A aa;
+    B bb;
+    aa.a = 1;
+    bb.a = 2;
+    cout << aa.a << endl;
+    cout << bb.a << endl;
     system("pause");
     return 0;
 }
+
+
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main()
+// {
+//     vector<int> numbers = {2,2,2,0,0,0,0,1,1,1};
+//     int n = numbers.size();
+//     if (n == 1)  return numbers[0];
+//     int left = 0, right = n - 1, min_ = INT_MAX;
+//     while (left < right) {
+//         int mid = left + (right - left) / 2;
+//         if (numbers[mid] > numbers[right]) {
+//             left = mid + 1;
+//         }
+//         else if (numbers[mid] < numbers[right]) {
+//             right = mid;
+//         }
+//         else if(numbers[mid] == numbers[right]) {
+//             right--;
+//         }
+//     }
+//     cout << left << endl;
+//     system("pause");
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// string Encode(string str) {
+//     int sz = str.size();
+//     if (sz % 5 != 0) {
+//         int c = 5 - str.size() % 5;
+//         for (int i = 0; i < c; ++i) {
+//             str.push_back('=');
+//         }
+//     }
+//     string result;
+//     int index = 0;
+//     while(sz > 0) {
+//         char ch1 = str[index], ch2 = str[index + 1], ch3 = str[index + 2], ch4 = str[index + 3], ch5 = str[index + 4];
+//         result += (char)(ch1 >> 3);
+//         result += (char)(((ch1 & 0x07) << 2) + (ch2 >> 6));
+//         result += (char)((ch2 & 0x3e) >> 1);
+//         result += (char)(((ch2 & 0x01) << 4) + (ch3 >> 4));
+//         result += (char)((ch3 & 0x0f) + ch4 >> 7);
+//         result += (char)((ch4 & 0x7f) >> 2);
+//         result += (char)(((ch4 & 0x03) << 3) + (ch5 >> 5));
+//         result += (char)(ch5 & 0x1f);
+//         index += 5;
+//         sz -= 5;
+//     }
+//     return result;
+// }
+
+// int main()
+// {
+//     string input;
+//     getline(cin, input);
+//     cout << Encode(input) << endl;
+//     system("pause");
+//     return 0;
+// }
+
+
+
+
+// #include <iostream>
+// using namespace std;
+
+// class A {
+// public:
+//     A() { a = 0;}
+//     friend void out();
+// private:
+//     int a;
+
+
+// };
+
+// A aaaa;
+
+// void out() {
+//     cout << aaaa.a << endl;
+// }
+
+// int main()
+// {
+
+//     long long a = 0x7fffffffffffffff;
+//     long long b = 0x8000000000000000;
+//     out();
+//     cout << a << endl;
+//     cout << b << endl;
+//     cout << a + b << endl;
+//     system("pause");
+//     return 0;
+// }
+
+
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// class Base {
+// public:
+//     int base_a;
+//     virtual void myfunc() {
+//         cout << "I am Base" << endl;
+//     }
+// };
+
+// int main()
+// {
+//     cout << sizeof(Base) << endl;
+//     int a[2][3];
+//     a[1>2][!1] = 1;
+//     system("pause");
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <memory>
+// using namespace std;
+
+// int main()
+// {
+//     unique_ptr<int> p(new int(2));
+//     cout << sizeof(p) << endl;
+// }
+
+
+// #include <random>
+// #include <vector>
+// #include <time.h>
+// using namespace std;
+
+// class Solution {
+// public:
+//     int maxPoints(vector<vector<int>>& points) {
+//         int n = points.size();
+//         // default_random_engine e;
+//         int inlier = 0;
+//         srand((unsigned)time(NULL));
+//         for (int p = 0; p < 200; ++p) {
+//             int ind1 = rand() % n;
+//             int ind2 = rand() % n;
+//             while (ind1 == ind2) {
+//                 ind2 = rand() % n;
+//             }
+//             // cout << ind1 << " " << ind2 << endl;
+//             int new_inlier = 2;
+//             for (int i = 0; i < n; ++i) {
+//                 if (i != ind1 && i != ind2) {
+//                     double x1 = points[ind1][0], y1 = points[ind1][1];
+//                     double x2 = points[ind2][0], y2 = points[ind2][1];
+//                     double x0 = points[i][0], y0 = points[i][1];
+//                     if (fabs((y1 - y0) * (x2 - x0) - (y2 - y0) * (x1 - x0)) < 1e-8) {
+//                         ++new_inlier;
+//                     }
+//                 }
+//             }
+//             inlier = max(inlier, new_inlier);
+//             // cout << inlier << endl;
+//         }
+//         return inlier;
+//     }
+// };
+
+// int main()
+// {
+//     Solution sol;
+//     vector<vector<int>> data = {{1,1}, {3,2}, {5,3}, {4,1}, {2,3}, {1,4}};
+//     cout << sol.maxPoints(data) << endl;
+//     system("pause");
+//     return 0;
+// }
 
 
 

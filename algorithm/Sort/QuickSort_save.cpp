@@ -35,7 +35,7 @@ void quickSort(int low, int high, vector<int> &sortdata) {
 		sortdata[begin] = sortdata[0];
 		// 输出每轮结果
 		for (int i = 1; i < sortdata.size(); ++i) {
-			cout << sortdata[i] << " ";
+			cout << (char)sortdata[i] << " ";
 		}
 		cout << endl;
 		quickSort(low, begin - 1, sortdata);
@@ -67,7 +67,8 @@ void quickSort_naive(vector<int> &a, int left, int right) {
 
 int main()
 {
-	vector<int> data = { 0, 12, 56, 79, 83, 54, 25, 78, 99, 17, 33, 87, 45, 43 };
+	// vector<int> data = { 0, 12, 56, 79, 83, 54, 25, 78, 99, 17, 33, 87, 45, 43 };
+	vector<int> data = { 'Q', 'H', 'C', 'Y', 'P', 'A', 'M', 'S', 'R', 'D', 'F', 'X' };
 	cout << endl << data.size() << endl << endl;
 	quickSort(1, data.size() - 1, data);
 	vector<int> data1 = { 25, 84, 21, 47, 15, 27, 68, 35, 20 };
