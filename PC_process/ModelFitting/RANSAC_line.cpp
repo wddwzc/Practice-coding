@@ -2,6 +2,7 @@
 #include <random>
 #include <algorithm>
 #include <ctime>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Point
@@ -28,6 +29,13 @@ public:
         ret = vec.x * x + vec.y * y;
         return ret;
     }
+    Point cross(Point &vec) {
+        Point ret;
+        ret.x = y * vec.z - z * vec.y;
+        ret.y = z * vec.x - x * vec.z;
+        ret.z = x * vec.y - y * vec.x;
+        return ret;
+    }
     Point operator-(Point &p) {
         Point ret;
         ret.x = x - p.x;
@@ -47,22 +55,9 @@ void ransac(const vector<Point> &data, vector<Point> &inlier, vector<Point> &out
     Point best_n(0.0, 0.0);
     Point best_p(0.0, 0.0);
     size_t sz = data.size();
+    vector<Point> best_in;
 
     for(size_t i = 0; i < num_iter; ++i){
-        // 获取随机数种子
-        // std::random_device dev;
-        // // 随机数标准  还可以是gen(dev())
-        // //std::mt19937 rng(dev());
-        // std::mt19937 rng(time(0));
-        // // 生成范围内的整型随机数
-        // std::uniform_int_distribution<std::mt19937::result_type> dist(0, sz - 1);
-        
-        // size_t index1 = dist(rng);
-        // size_t index2;
-        // do {
-        //     index2 = dist(rng);
-        // } while (index1 == index2);
-
         size_t index1 = rand() % sz;
         size_t index2;
         do {
@@ -77,16 +72,18 @@ void ransac(const vector<Point> &data, vector<Point> &inlier, vector<Point> &out
         // cout << "Point1:" << p1.x << " " << p1.y << "  Point2:" << p2.x << " " << p2.y << endl;
         // cout << "Selected:" << index1 << " " << index2 << "  norm:" << n.x << " " << n.y << endl;
         double k = (p1.y - p2.y) / (p1.x - p2.x);
-        double NNN = n.y / n.x;
+        double b = p1.y - k * p1.x;
         cout << "K:  " << k << endl;
-        cout << "N:  " << NNN << endl;
+        cout << "B:  " << b << endl;
 
         int num_inliners = 0;
 
+        vector<Point> pt_inlier;
         for(size_t j = 0; j < sz; ++j){
             Point cur_p(data[sz]);
             cur_p = cur_p - p1;
-            if((abs(n.dot(cur_p)) / n.norm()) < sigma){
+            if(fabs(n.cross(cur_p).norm() / n.norm()) < sigma) {
+                pt_inlier.push_back(cur_p);
                 num_inliners++;
             }
         }
@@ -95,6 +92,7 @@ void ransac(const vector<Point> &data, vector<Point> &inlier, vector<Point> &out
             best_n = n;
             best_p = p1;
             pre_total_inliner = num_inliners;
+            best_in = pt_inlier;
         }
     }
 
@@ -110,6 +108,22 @@ void ransac(const vector<Point> &data, vector<Point> &inlier, vector<Point> &out
     }
     cout << "Best normalization:" << best_n.x << "---" << best_n.y << endl;
     cout << "Best inlier ratio:" << (float)inlier.size() / (float)sz << endl;
+
+    size_t best_sz = best_in.size();
+    double xy_mean = 0, x_mean = 0, y_mean = 0, x2_mean = 0;
+    for (auto &p : best_in) {
+        xy_mean += p.x * p.y;
+        x_mean += p.x;
+        y_mean += p.y;
+        x2_mean += p.x * p.x;
+    }
+    xy_mean /= best_sz;
+    x_mean /= best_sz;
+    y_mean /= best_sz;
+    x2_mean /= best_sz;
+    int k = (xy_mean + x_mean * y_mean) / (x2_mean - x_mean * x_mean);
+    int bbb = y_mean - k * x_mean;
+
 }
 
 
