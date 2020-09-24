@@ -3,28 +3,27 @@ using namespace std;
 
 class A {
 public:
-    A() {}
-    ~A() {}
+    A() { a = 0; }
+    virtual ~A() { cout << "aaa" << endl; }
 
-    static int a;
+public:
+    int a;
 };
 
 class B : public A {
 public:
-    B() {}
-    ~B() {}
-
-    //static int a;
+    B() { a = 2; }
+    virtual ~B() { cout << "bbb" << endl; }
 };
 
 int main()
 {
-    A aa;
-    B bb;
-    aa.a = 1;
-    bb.a = 2;
-    cout << aa.a << endl;
-    cout << bb.a << endl;
+    A *p = new B;
+    cout << p->a << endl;
+    char a[] = "hello world";
+    char *p = a;
+    cout << sizeof(a) << endl;
+    cout << sizeof(p) << endl;
     system("pause");
     return 0;
 }
