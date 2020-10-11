@@ -58,3 +58,33 @@ public:
     unordered_set<int> visited;
     vector<vector<int>> res;
 };
+
+
+// 递归枚举 + 减枝
+class Solution {
+public:
+    void dfs(int cur, int last, vector<int>& nums) {
+        if (cur == nums.size()) {
+            if (temp.size() >= 2) {
+                ans.push_back(temp);
+            }
+            return;
+        }
+        if (nums[cur] >= last) {
+            temp.push_back(nums[cur]);
+            dfs(cur + 1, nums[cur], nums);
+            temp.pop_back();
+        }
+        if (nums[cur] != last) {
+            dfs(cur + 1, last, nums);
+        }
+    }
+
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        dfs(0, INT_MIN, nums);
+        return ans;
+    }
+
+    vector<int> temp; 
+    vector<vector<int>> ans;
+};
