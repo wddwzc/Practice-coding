@@ -17,6 +17,11 @@ sudo apt-get install libcupti-dev
 * ctrl+alt+F1进入终端模式
 * ctrl+alt+F7进入图形桌面模式
 
+或
+
+* init 3  进入终端模式
+* init 5  进入图形模式
+
 在终端模式下开始卸载驱动
 ```
 ### 通过apt-get方式安装的
@@ -106,6 +111,7 @@ nvidia-settings
 
 #### 关闭X server服务
 需要在命令行界面安装（ctrl+alt+F1/F2/F7切换），关闭x-server（阻碍驱动安装）
+在ubuntu18中装的时候，没有lightdm
 ```
 # 结束/开启x-window的服务
 sudo service lightdm stop

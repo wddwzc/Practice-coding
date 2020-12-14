@@ -2,9 +2,31 @@
 ## 换源、更新、卸载
 ## 换源
 * 1 对anaconda换源，更换成清华的源：
+
+[清华大学开源软件镜像站](mirrors.tuna.tsinghua.edu.cn)
+[中科大源](mirrors.ustc.edu.cn)
+
 ```
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytroch/
+
+# 或在~/.condarc中
+channels:
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytroch/
+ssl_verify: true
 ```
+
+如要换回conda的默认源，直接删除channels即可：
+
+```
+conda config --remove-key channels
+```
+
 * 2 设置显示源地址：
 ```
 conda config --set show_channel_urls yes
