@@ -1,12 +1,15 @@
-# TensorFlow安装
+# 深度学习环境
+
 ## I Graphic Driver
-### 1 安装准备
-#### 依赖库
+
+### 1 依赖库
+
 ```
 sudo apt-get install libcupti-dev
 ```
 
-#### 卸载nvidia驱动
+### 2 卸载nvidia驱动
+
 安装驱动前需要卸载老版本
 
 * 驱动和系统或硬件不兼容：导致输入登录密码后，桌面一闪而过，回到登陆界面
@@ -41,7 +44,8 @@ sudo reboot
 ```
 错误日志文件是~/.xsession-errors
 
-#### 禁用nouveau
+### 3 禁用nouveau
+
 nouveau驱动是ubuntu自带的开源nvidia驱动，没有GPU加速功能
 
 nouveau，是一个自由及开放源代码显卡驱动程序，是为Nvidia的显示卡所编写，也可用于属于系统芯片的NVIDIA Tegra系列，此驱动程序是由一群独立的软件工程师所编写，Nvidia的员工也提供了少许帮助。该项目的目标为利用逆向工程Nvidia的专有Linux驱动程序来创造一个开放源代码的驱动程序。所以nouveau开源驱动基本上是不能正常使用的，性能极低。
@@ -71,10 +75,14 @@ sudo reboot
 lsmod | grep nouveau
 ```
 
-### 2 apt-get安装
+### 4 安装nvidia驱动
+
+#### 4.1 apt-get安装
+
 该方式安装的是ubuntu的专有nvidia驱动，但该驱动一般不是最新的或是所需的
 
-#### 1. 查看ubuntu专有驱动
+**查看ubuntu专有驱动**
+
 ```
 sudo ubuntu-drivers devices
 ```
@@ -83,7 +91,8 @@ sudo ubuntu-drivers devices
 sudo lspci | grep -i nvidia
 ```
 
-#### 2. 安装专有驱动
+**安装专有驱动**
+
 该专有驱动是apt-get可以获取的驱动，其它版本无法获取
 ```
 sudo add-apt-repository ppa:graphics-drivers/ppa
@@ -95,7 +104,8 @@ sudo apt-get install freeglut3-dev
 reboot
 ```
 
-#### 3. 查看是否安装成功
+**查看是否安装成功**
+
 在About this computer中查看显卡栏，或如下方式：
 ```
 # 输出nvidia硬件及驱动信息
@@ -103,13 +113,17 @@ nvidia-smi
 # 打开nvidia控制面板
 nvidia-settings
 ```
-### 3 runfile安装
+
+#### 4.2 runfile安装
+
 在官网下载[GPU驱动](https://developer.nvidia.com/)
 
-#### 关闭UEFI模式
+**关闭UEFI模式**
+
 安装驱动的需要，关闭Secure Boot，就可以切换到Legacy模式
 
-#### 关闭X server服务
+**关闭X server服务**
+
 需要在命令行界面安装（ctrl+alt+F1/F2/F7切换），关闭x-server（阻碍驱动安装）
 在ubuntu18中装的时候，没有lightdm
 ```
@@ -119,8 +133,10 @@ sudo service lightdm stop
 sudo service lightdm start
 ```
 
-#### run安装
+**run安装**
+
 ```
+# 最好参照按照官网的提示来
 sudo chmod +x NVIDIA-Linux-x86_64-375.20.run
 sudo ./NVIDIA-Linux-x86_64-375.20.run -no-x-check -no-nouveau-check -no-opengl-files
 ```
@@ -130,7 +146,7 @@ sudo ./NVIDIA-Linux-x86_64-375.20.run -no-x-check -no-nouveau-check -no-opengl-f
 * -no-x-check 不见差x服务
 * -no-nouveau-check 安装时不检查nouveau，但可能因为nouveau未禁用而安装失败
 
-### 4 使用标准仓库进行自动化安装
+#### 4.3 使用标准仓库进行自动化安装
 
 在安装的发行版中，如 ubuntu, Linux Mint等，找到**附加驱动管理软件**，直接安装
 
@@ -157,6 +173,7 @@ sudo ubuntu-drivers autoinstall     # 安装所推荐的驱动版本
 ```
 
 ### 5 独显 & 核显切换
+
 1. 检查显卡
 ```
 lspci -k | grep -A 2 -i "VGA"
@@ -226,9 +243,14 @@ echo 'nouveau' | sudo tee -a /etc/modules
 ```
 
 ## II cuda安装
+
 ### 1 安装流程
-#### 下载合适的版本
+
+**下载合适的版本**
+
 下载合适的[cuda](https://developer.nvidia.com/cuda-toolkit)版本，下载runfile(local)包
+
+版本对应关系[文档](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)
 
 * Documentation包含安装文档
 * Release Notes附有cuda和driver版本对应表
@@ -236,7 +258,8 @@ echo 'nouveau' | sudo tee -a /etc/modules
 
 **注**：最好选择x.0版本，否则可能会出现库的调用问题
 
-#### 选择runfile安装
+**选择runfile安装**
+
 ```
 # Example 赋权限
 sudo chmod +x cuda_9.1.85_387.26_linux.run
@@ -245,9 +268,10 @@ sudo ./cuda_9.1.85_387.26_linux.run
 # 或
 sudo ./cuda_9.1.85_387.26_linux.run --no
 ```
+
 **注意**：cuda会提示安装nvidia驱动，如果已经安装了合适的驱动，此处选no，其他选项根据需要选取，默认库路径为/usr/local/cuda-version
 
-#### 添加库文件路径
+**添加库文件路径**
 在profile中添加（经测试），也可以在./bashrc
 ```
 # 打开profile文件
@@ -263,7 +287,8 @@ source ~/.bashrc
 sudo ldconfig -v
 ```
 
-#### 重启并测试cuda
+**重启并测试cuda**
+
 ```
 # 测试cuda的samples
 /usr/local/cuda-9.1/samples/1_Utilities/deviceQuery
@@ -272,15 +297,23 @@ sudo ldconfig -v
 nvcc -V
 ```
 
+conda中的cudatoolkit只是nvidia安装的CUDA的部分文件，为了让普通需要CUDA的程序员能够在系统没有安装CUDA的时候也能运行，环境在安装的时候，自动安装了部分CUDA文件，的但是CUDA的其他文件可能没有，比如nvcc
+
+因此完整的CUDA也需要安装，另外，如果驱动满足，这里的cudatoolkit版本不和系统一样，也能正常使用，cuDNN也是一样，conda自动安装了合适的版本
+
 ### 2 卸载cuda
+
 安装目录默认在/usr/local/cuda，可用如下命令卸载：
 ```
 sudo /usr/local/cuda-8.0/bin/uninstall_cuda-8.0.pl
 ```
 再将文件夹残余清理掉即可
 
+
 ## III cudnn安装
+
 ### 1 下载
+
 同样官网下载[CUDNN](https://developer.nvidia.com/rdp/cudnn-download)
 
 下载cudnn需要登录，提供的两种安装方式：
@@ -295,6 +328,9 @@ sudo apt-get install libcupti-dev
 
 ### 2 库安装
 #### library方式
+
+解压后，只需要把inlude和lib64中的文件放在对应目录下即可
+
 解压后，文件目录大致如下：
 ```
 cuda/include/cudnn.h
@@ -304,11 +340,13 @@ cuda/lib64/libcudnn.so.7
 cuda/lib64/libcudnn.so.7.4.2
 cuda/lib64/libcudnn_static.a
 ```
+
 将头文件和库文件分别放到cuda目录下：
 ```
 cp cuda/lib64/* /usr/local/cuda-10.0/lib64/
 cp cuda/include/* /usr/local/cuda-10.0/include/
 ```
+
 可以通过如下命令查看CUDNN的版本信息：
 ```
 cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
@@ -340,11 +378,13 @@ sudo dpkg -i libcudnn7_7.0.3.11-1+cuda9.0_amd64.deb
 sudo dpkg -i libcudnn7-dev_7.0.3.11-1+cuda9.0_amd64.deb
 sudo dpkg -i libcudnn7-doc_7.0.3.11-1+cuda9.0_amd64.deb
 ```
+
 该安装方式经测试，会把头文件放在/usr/include目录下，库文件在/usr/lib/x86_64-linux-gnu下
 
 双击安装的话，其目录分别为/usr/local/cuda/include和/usr/local/cuda/lib64
 
 ### 3 cudnn安装验证
+
 sample在/usr/src/cudnn_samples_v7目录下，通过mnistCUDNN验证
 
 输出结果末尾有 Test passed，所名安装成功
