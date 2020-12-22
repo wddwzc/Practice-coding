@@ -146,6 +146,77 @@ sudo ./NVIDIA-Linux-x86_64-375.20.run -no-x-check -no-nouveau-check -no-opengl-f
 * -no-x-check 不见差x服务
 * -no-nouveau-check 安装时不检查nouveau，但可能因为nouveau未禁用而安装失败
 
+安装过程：
+
+```
+The distribution-provided pre-install script failed!  Are you sure you want
+  to continue?                                                                 
+       
+                 Continue installation      Abort installation       
+
+----> Continue installation
+
+Would you like to register the kernel module sources with DKMS? This will    
+  allow DKMS to automatically build a new module, if you install a different   
+  kernel later.
+
+                          Yes                       No  
+---->No
+
+ The CC version check failed:
+
+  The kernel was built with gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1), 
+  but the current compiler version is cc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0.  
+
+  This may lead to subtle problems; if you are not certain whether the         
+  mismatched compiler will be compatible with your kernel, you may wish to     
+  abort installation, set the CC environment variable to the name of the       
+  compiler used to compile your kernel, and restart installation.
+
+                Ignore CC version check     Abort installation         
+
+----> select ignore
+
+ WARNING: Ignoring CC version mismatch:
+
+           The kernel was built with gcc version 7.4.0 (Ubuntu
+           7.4.0-1ubuntu1~18.04.1), but the current compiler version is cc     
+           (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0.
+
+                                       OK  
+----> OK
+
+Install NVIDIA's 32-bit compatibility libraries?
+                                                                               
+                          Yes                       No   
+----> No
+
+ An incomplete installation of libglvnd was found. All of the essential       
+  libglvnd libraries are present, but one or more optional components are      
+  missing. Do you want to install a full copy of libglvnd? This will overwrite 
+  any existing libglvnd libraries.
+
+      Don't install  Install and overw          Abort installation.       
+
+---->Install and overw
+
+Would you like to run the nvidia-xconfig utility to automatically update
+  your X configuration file so that the NVIDIA X driver will be used when you
+  restart X?  Any pre-existing X configuration file will be backed up.         
+                                                                      
+                          Yes                       No                 
+                          
+---->Yes
+
+Your X configuration file has been successfully updated.  Installation of    
+  the NVIDIA Accelerated Graphics Driver for Linux-x86_64 (version: 440.100)   
+  is now complete.
+
+                                       OK  
+----> OK
+
+```
+
 #### 4.3 使用标准仓库进行自动化安装
 
 在安装的发行版中，如 ubuntu, Linux Mint等，找到**附加驱动管理软件**，直接安装
@@ -316,6 +387,8 @@ sudo /usr/local/cuda-8.0/bin/uninstall_cuda-8.0.pl
 
 同样官网下载[CUDNN](https://developer.nvidia.com/rdp/cudnn-download)
 
+outlook邮箱  Nvidia_num
+
 下载cudnn需要登录，提供的两种安装方式：
 
 1. cuDNN Library for linux 库文件压缩包
@@ -395,43 +468,3 @@ sample在/usr/src/cudnn_samples_v7目录下，通过mnistCUDNN验证
 sudo rm -rf /usr/local/cuda/include/cudnn.h
 sudo rm -rf /usr/local/cuda/lib64/libcudnn*
 ```
-
-## IV Tensorflow安装
-### Anaconda
-更换conda的镜像库，可以更快，但一些最新版本一般没有
-```
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-conda config --set show_channel_urls yes
-```
-```
-conda search tensorflow
-```
-安装
-
-先激活要安装tensorflow的虚拟环境
-```
-conda install tensorflow
-```
-虽然可以安装很多版本，但是经过测试，conda安装时的版本是根据python版本的对应关系直接安装的
-
-指定版本安装时发现如果不是推荐版本，无法安装
-
-所以其安装时的自由度较低，只能通过更换python版本来实现更换tensorflow的目的（目前为止只找到了这个解决方案）
-
-简单测试代码
-```python
-import tensorflow as tf
-print(tf.__version__) # 版本信息
-print(tf.__path__)  # 库安装路径
-hello = tf.constant('Hello, TensorFlow!')
-sess = tf.Session()
-print(sess.run(hello))
-```
-
-tensorflow卸载
-```
-pip uninstall tensorflow
-```
-
-### pip

@@ -126,3 +126,27 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/f
 conda config --set show_channel_urls yes
 conda install numpy   #测试是否添加成功
 ```
+
+# jupyter notebook
+
+## 添加虚拟环境
+
+找不到虚拟环境是因为虚拟环境下缺少kernel.json
+
+在创建环境时加入ipykernel
+
+```
+conda create -n 环境名称 ipykernel
+```
+
+或激活目标环境，然后
+
+```
+python -m ipykernel install --user --name 虚拟环境名称 --display-name “虚拟环境名称”
+```
+
+删除kernel环境
+
+```
+jupyter kernelspec remove
+```
