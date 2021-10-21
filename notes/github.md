@@ -143,3 +143,5 @@ git pull origin master    // 将服务器的代码更新到本地仓库中
 
 * 命令：git push origin :branch_name
 * 示例：git push origin :test-name
+
+* git push origin --delete localbranch
